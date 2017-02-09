@@ -11,6 +11,7 @@ class Game
     /** @var array */
     protected $board;
     protected $nextBoard;
+    protected $boardSize;
 
     /** @var bool */
     protected $initialized = false;
@@ -21,6 +22,19 @@ class Game
     protected function isInitialized()
     {
         return $this->initialized;
+    }
+
+    /**
+     * @param array $board
+     */
+    public function setBoard(array $board)
+    {
+        $this->board = $board;
+    }
+
+    public function getBoardSize()
+    {
+        return $this->boardSize;
     }
 
     protected function isValidBoard(array $board)
@@ -66,6 +80,7 @@ class Game
             return false;
         }
 
+        $this->boardSize = count($board[0]);
         $this->board = $board;
         $this->initialized = true;
 

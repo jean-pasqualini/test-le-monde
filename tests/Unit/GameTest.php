@@ -1,5 +1,5 @@
 <?php
-namespace tests;
+namespace tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Game;
