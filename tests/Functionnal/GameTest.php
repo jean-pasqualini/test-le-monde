@@ -2,13 +2,14 @@
 
 namespace tests\Functionnal;
 
+use GameRunner\TestableGameRunner;
 use PHPUnit\Framework\TestCase;
 use Screen\ConsoleScreen;
 
 class GameTest extends TestCase
 {
     protected $game;
-    /** @var \TestableGameRunner */
+    /** @var TestableGameRunner */
     protected $gameRunner;
     protected $screen;
 
@@ -17,7 +18,7 @@ class GameTest extends TestCase
         $this->game = new \Game();
         $this->screen = new ConsoleScreen();
         $this->screen->disableCleanFeature();
-        $this->gameRunner = new \TestableGameRunner($this->game, $this->screen);
+        $this->gameRunner = new TestableGameRunner($this->game, $this->screen);
     }
 
     public function testUpdate()

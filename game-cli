@@ -7,6 +7,6 @@ $board = $boardLoader->load(__DIR__.'/board/standard.board');
 
 $game       = new \Game();
 $screen     = new \Screen\ConsoleScreen();
-$gameRunner = new GameRunner($game, $screen);
+$gameRunner = new \GameRunner\GameRunner($game, $screen);
 
 $gameRunner->run($board, 5);
