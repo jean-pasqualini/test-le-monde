@@ -10,6 +10,7 @@ class GameRunner
 {
     protected $game;
     protected $screen;
+    protected $board;
 
     public function __construct(Game $game, \Screen\ScreenInterface $screen)
     {
