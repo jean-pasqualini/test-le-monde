@@ -2,11 +2,8 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
 
-$board = array(
-    array(\Game::STATE_DEAD, \Game::STATE_LIFE, \Game::STATE_DEAD),
-    array(\Game::STATE_DEAD, \Game::STATE_LIFE, \Game::STATE_DEAD),
-    array(\Game::STATE_DEAD, \Game::STATE_LIFE, \Game::STATE_DEAD),
-);
+$boardLoader = new \BoardLoader\FileLoader();
+$board = $boardLoader->load(__DIR__.'/board/standard.board');
 
 $game       = new \Game();
 $screen     = new \Screen\ConsoleScreen();
