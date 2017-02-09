@@ -23,6 +23,38 @@ class Game
         return $this->initialized;
     }
 
+    protected function isValidBoard(array $board)
+    {
+        $boardLines = $board;
+
+        $availablesState = array(self::STATE_DEAD, self::STATE_LIFE);
+
+        $linesSize = array();
+
+        foreach ($boardLines as $boardLine) {
+            // Check if multidimensional array
+            if (!is_array($boardLine)) {
+                return false;
+            }
+
+            // Check if none unknow state is in array
+            foreach ($boardLine as $celluleItem) {
+                if (!in_array($celluleItem, $availablesState)) {
+                    return false;
+                }
+            }
+
+            // Check if all line as same size
+            $lineSize = count($boardLine);
+            if (!empty($linesSize) && !in_array($lineSize, $linesSize)) {
+                return false;
+            }
+            $linesSize[] = $lineSize;
+        }
+
+        return true;
+    }
+
     /**
      * initialize
      *
@@ -30,6 +62,10 @@ class Game
      */
     public function initialize(array $board)
     {
+        if (!$this->isValidBoard($board)) {
+            return false;
+        }
+
         $this->board = $board;
         $this->initialized = true;
 

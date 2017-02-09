@@ -49,6 +49,25 @@ class GameTest extends TestCase
                 'round' => 2
             )
         );
+
+        // Test grenouille
+        yield array(
+            array(
+                'initState' => array(
+                    array(Game::STATE_DEAD,   Game::STATE_DEAD,     Game::STATE_DEAD,     Game::STATE_DEAD),
+                    array(Game::STATE_DEAD,   Game::STATE_LIFE,     Game::STATE_LIFE,     Game::STATE_LIFE),
+                    array(Game::STATE_LIFE,   Game::STATE_LIFE,     Game::STATE_LIFE,     Game::STATE_DEAD),
+                    array(Game::STATE_DEAD,   Game::STATE_DEAD,     Game::STATE_DEAD,     Game::STATE_DEAD),
+                ),
+                'endState' => array(
+                    array(Game::STATE_DEAD,   Game::STATE_DEAD,     Game::STATE_LIFE,     Game::STATE_DEAD),
+                    array(Game::STATE_LIFE,   Game::STATE_DEAD,     Game::STATE_DEAD,     Game::STATE_LIFE),
+                    array(Game::STATE_LIFE,   Game::STATE_DEAD,     Game::STATE_DEAD,     Game::STATE_LIFE),
+                    array(Game::STATE_DEAD,   Game::STATE_LIFE,     Game::STATE_DEAD,     Game::STATE_DEAD),
+                ),
+                'round' => 1
+            )
+        );
     }
 
     public function testConstructor()
@@ -58,12 +77,41 @@ class GameTest extends TestCase
 
     public function testInitializeWithValidArray()
     {
-        self::assertTrue($this->game->initialize(array()));
+        self::assertTrue($this->game->initialize(array(
+            array(Game::STATE_DEAD,   Game::STATE_DEAD,     Game::STATE_DEAD),
+            array(Game::STATE_LIFE,   Game::STATE_LIFE,     Game::STATE_LIFE),
+            array(Game::STATE_DEAD,   Game::STATE_DEAD,     Game::STATE_DEAD),
+        )));
     }
 
-    public function testInitializeWithBadArray()
+    public function provideInitializeWithBadArray()
     {
-        self::markTestSkipped('TODO : Complete this test');
+        yield array(
+            $testName = 'Invalid state',
+            array(array(3))
+        );
+
+        yield array(
+            $testName = 'Not multidimensional array',
+            array(Game::STATE_LIFE)
+        );
+
+        yield array(
+            $testName = 'Board with differents size lines',
+            array(
+                array(Game::STATE_DEAD,   Game::STATE_DEAD,     Game::STATE_DEAD),
+                array(Game::STATE_LIFE,   Game::STATE_LIFE),
+                array(Game::STATE_DEAD,   Game::STATE_DEAD,     Game::STATE_DEAD),
+            )
+        );
+    }
+
+    /**
+     * @dataProvider provideInitializeWithBadArray
+     */
+    public function testInitializeWithBadArray($testName, $badArray)
+    {
+        self::assertFalse($this->game->initialize($badArray), $testName);
     }
 
     /**

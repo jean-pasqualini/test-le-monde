@@ -10,3 +10,7 @@ composer install
 
 #### Run tests
 vendor/bin/phpunit -c phpunit.xml.dist
+
+#### Links
+
+https://fr.wikipedia.org/wiki/Jeu_de_la_vie
