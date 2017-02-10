@@ -83,6 +83,7 @@ class ImageScreen implements ScreenInterface
 
     public function clean()
     {
+
     }
 
     public function show()
