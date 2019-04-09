@@ -18,25 +18,28 @@ class GameRunner
         $gameView->show();
     }
 
-    public function run(array $board, $loop = 1, $clean = true, $sleep = 1)
+    public function run(array $board, $loop = 1, $clean = true, $reloadInfinite = false)
     {
-        $this->game->initialize($board);
-        $gameView = new \GameView($this->game, $this->screen);
+        $countRun = 0;
 
-        if ($clean) {
-            $gameView->clean();
-        }
-
-        for ($loopIteration = 1; $loopIteration <= $loop; $loopIteration++) {
-            $gameView->update();
-            $this->showGame($gameView);
-            if ($sleep) {
-                sleep(1);
-            }
+        while ($reloadInfinite || ($countRun < 1)) {
+            $this->game->initialize($board);
+            $gameView = new \GameView($this->game, $this->screen);
 
             if ($clean) {
                 $gameView->clean();
             }
+
+            for ($loopIteration = 1; $loopIteration <= $loop; $loopIteration++) {
+                $gameView->update();
+                $this->showGame($gameView);
+                usleep(100000);
+
+                if ($clean) {
+                    $gameView->clean();
+                }
+            }
         }
+
     }
 }

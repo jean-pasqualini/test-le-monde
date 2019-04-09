@@ -3,10 +3,10 @@
 require __DIR__.'/vendor/autoload.php';
 
 $boardLoader = new \BoardLoader\FileLoader();
-$board = $boardLoader->load(__DIR__.'/board/standard.board');
+$board = $boardLoader->load(__DIR__.'/board/planneur.board');
 
 $game       = new \Game();
 $screen     = new \Screen\ConsoleScreen();
 $gameRunner = new \GameRunner\GameRunner($game, $screen);
 
-$gameRunner->run($board, 5);
+$gameRunner->run($board, 8, true, false);
