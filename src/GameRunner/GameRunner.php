@@ -33,12 +33,13 @@ class GameRunner
             for ($loopIteration = 1; $loopIteration <= $loop; $loopIteration++) {
                 $gameView->update();
                 $this->showGame($gameView);
-                usleep(100000);
 
                 if ($clean) {
                     $gameView->clean();
                 }
             }
+
+            $countRun = 1;
         }
 
     }
